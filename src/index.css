@@ -1,0 +1,180 @@
+@import 'tailwindcss';
+
+/* Manual dark mode driven by data-theme on <html> (set before paint in index.html). */
+@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
+
+@theme inline {
+  --font-sans: 'Plus Jakarta Sans', 'Cairo', ui-sans-serif, system-ui, sans-serif;
+  --font-arabic: 'Cairo', 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-fg: var(--fg);
+  --color-muted: var(--fg-muted);
+
+  --color-primary: var(--primary);
+  --color-primary-strong: var(--primary-strong);
+  --color-primary-soft: var(--primary-soft);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+
+  --color-protein: var(--protein);
+  --color-carbs: var(--carbs);
+  --color-fat: var(--fat);
+  --color-fiber: var(--fiber);
+
+  --radius-xl2: 1.5rem;
+  --shadow-soft: var(--shadow-soft-val);
+  --shadow-card: var(--shadow-card-val);
+}
+
+:root {
+  --bg: #f6f4ee;
+  --surface: #ffffff;
+  --surface-2: #f0ece2;
+  --surface-3: #e7e1d3;
+  --border: #e6dfd0;
+  --border-strong: #d6cdb9;
+  --fg: #1b201c;
+  --fg-muted: #63705f;
+
+  --primary: #15a05a;
+  --primary-strong: #0e7c43;
+  --primary-soft: #e2f5ea;
+  --accent: #ef6c2f;
+  --accent-soft: #fceadd;
+
+  --protein: #dd5a6d;
+  --carbs: #d99a1f;
+  --fat: #2f97d4;
+  --fiber: #43ad64;
+
+  --shadow-soft-val: 0 1px 2px rgba(24, 34, 26, 0.04), 0 4px 14px rgba(24, 34, 26, 0.05);
+  --shadow-card-val: 0 2px 6px rgba(24, 34, 26, 0.05), 0 12px 30px rgba(24, 34, 26, 0.08);
+
+  color-scheme: light;
+}
+
+[data-theme='dark'] {
+  --bg: #0f1512;
+  --surface: #161d19;
+  --surface-2: #1d2621;
+  --surface-3: #27332c;
+  --border: #2b3831;
+  --border-strong: #3a4a41;
+  --fg: #edf2ee;
+  --fg-muted: #96a69b;
+
+  --primary: #3ad07f;
+  --primary-strong: #55dc90;
+  --primary-soft: rgba(58, 208, 127, 0.14);
+  --accent: #ff8a4c;
+  --accent-soft: rgba(255, 138, 76, 0.15);
+
+  --protein: #f0788a;
+  --carbs: #f0bd57;
+  --fat: #5cb8ea;
+  --fiber: #5fce85;
+
+  --shadow-soft-val: 0 1px 2px rgba(0, 0, 0, 0.3), 0 4px 14px rgba(0, 0, 0, 0.35);
+  --shadow-card-val: 0 2px 6px rgba(0, 0, 0, 0.35), 0 14px 34px rgba(0, 0, 0, 0.45);
+
+  color-scheme: dark;
+}
+
+* {
+  border-color: var(--color-border);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100svh;
+  /* Guard against any accidental horizontal overflow shifting the RTL layout,
+     without breaking the sticky header (clip keeps overflow-y visible). */
+  overflow-x: clip;
+  background-color: var(--color-bg);
+  color: var(--color-fg);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Prefer Cairo for Arabic UI. */
+html[lang='ar'] body {
+  font-family: var(--font-arabic);
+}
+
+/* Slightly larger line-height for Arabic readability across all ages. */
+html[lang='ar'] {
+  line-height: 1.75;
+}
+
+::selection {
+  background: var(--color-primary);
+  color: white;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Themed scrollbar */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-border-strong);
+  border-radius: 999px;
+  border: 3px solid var(--color-bg);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes float-slow {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float {
+  animation: float-slow 6s ease-in-out infinite;
+}
