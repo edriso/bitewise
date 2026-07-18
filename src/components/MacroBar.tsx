@@ -14,7 +14,7 @@ interface MacroBarProps {
  * and fat. Protein & carbs = 4 kcal/g, fat = 9 kcal/g.
  */
 export function MacroBar({ protein, carbs, fat, showLegend = true, height = 10 }: MacroBarProps) {
-  const { t } = useI18n()
+  const { t, n } = useI18n()
   const pKcal = protein * 4
   const cKcal = carbs * 4
   const fKcal = fat * 9
@@ -34,7 +34,7 @@ export function MacroBar({ protein, carbs, fat, showLegend = true, height = 10 }
         className="flex w-full overflow-hidden rounded-full bg-surface-2"
         style={{ height }}
         role="img"
-        aria-label={`${t('foods.protein')} ${protein}${t('foods.grams')}, ${t('foods.carbs')} ${carbs}${t('foods.grams')}, ${t('foods.fat')} ${fat}${t('foods.grams')}`}
+        aria-label={`${t('foods.protein')} ${n(protein)}${t('foods.grams')}, ${t('foods.carbs')} ${n(carbs)}${t('foods.grams')}, ${t('foods.fat')} ${n(fat)}${t('foods.grams')}`}
       >
         {total > 0 &&
           parts.map((p) => (
@@ -52,7 +52,7 @@ export function MacroBar({ protein, carbs, fat, showLegend = true, height = 10 }
               <span className="size-2.5 rounded-full" style={{ backgroundColor: p.color }} />
               {p.label}
               <span className="text-fg">
-                {p.grams}
+                {n(p.grams)}
                 {t('foods.grams')}
               </span>
             </span>

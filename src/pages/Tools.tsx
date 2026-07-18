@@ -179,7 +179,7 @@ const num = (s: string) => (s.trim() === '' ? NaN : Number(s))
 /* ---------- BMI ---------- */
 
 function BmiTool() {
-  const { t } = useI18n()
+  const { t, n } = useI18n()
   const [weight, setWeight] = useState('')
   const [height, setHeight] = useState('')
 
@@ -223,7 +223,7 @@ function BmiTool() {
         <div className="mt-8 animate-fade-up">
           <div className="text-center">
             <p className="text-sm font-semibold text-muted">{t('tools.yourResult')}</p>
-            <p className="text-5xl font-extrabold text-fg">{round(result.value, 1)}</p>
+            <p className="text-5xl font-extrabold text-fg">{n(round(result.value, 1))}</p>
             <span
               className="mt-2 inline-flex rounded-full px-4 py-1 text-sm font-bold text-white"
               style={{ backgroundColor: catColor[result.cat] }}
@@ -248,7 +248,7 @@ function BmiTool() {
           </div>
 
           <p className="mt-6 text-center text-sm text-muted">
-            {t('tools.bmiHealthyRange')} · {round(result.range[0])}–{round(result.range[1])}{' '}
+            {t('tools.bmiHealthyRange')} · {n(round(result.range[0]))}–{n(round(result.range[1]))}{' '}
             {t('tools.kg')}
           </p>
         </div>
@@ -260,7 +260,7 @@ function BmiTool() {
 /* ---------- Calories ---------- */
 
 function CaloriesTool({ onResult }: { onResult: (c: number) => void }) {
-  const { t } = useI18n()
+  const { t, n } = useI18n()
   const [sex, setSex] = useState<Sex>('male')
   const [age, setAge] = useState('')
   const [weight, setWeight] = useState('')
@@ -344,17 +344,17 @@ function CaloriesTool({ onResult }: { onResult: (c: number) => void }) {
           <div className="grid gap-3 sm:grid-cols-3">
             <StatBlock
               label={t('tools.bmr')}
-              value={String(round(result.bmr))}
+              value={n(round(result.bmr))}
               unit={t('tools.perDay')}
             />
             <StatBlock
               label={t('tools.tdee')}
-              value={String(round(result.maintain))}
+              value={n(round(result.maintain))}
               unit={t('tools.perDay')}
             />
             <StatBlock
               label={t('tools.goalCalories')}
-              value={String(round(result.goalCals))}
+              value={n(round(result.goalCals))}
               unit={t('tools.perDay')}
               accent="var(--primary)"
             />
@@ -375,7 +375,7 @@ function CaloriesTool({ onResult }: { onResult: (c: number) => void }) {
 /* ---------- Macros ---------- */
 
 function MacrosTool({ initialCalories }: { initialCalories: number | null }) {
-  const { t } = useI18n()
+  const { t, n } = useI18n()
   const [calories, setCalories] = useState(initialCalories ? String(initialCalories) : '')
   const [style, setStyle] = useState<MacroStyle>('balanced')
 
@@ -437,11 +437,11 @@ function MacrosTool({ initialCalories }: { initialCalories: number | null }) {
                   {m.label}
                 </p>
                 <p className="mt-1 text-2xl font-extrabold text-fg">
-                  {round(m.data.grams)}
+                  {n(round(m.data.grams))}
                   <span className="text-base font-bold text-muted"> {t('foods.grams')}</span>
                 </p>
                 <p className="text-xs font-semibold text-muted">
-                  {round(m.data.pct * 100)}% · {round(m.data.kcal)} {t('foods.kcal')}
+                  {n(`${round(m.data.pct * 100)}%`)} · {n(round(m.data.kcal))} {t('foods.kcal')}
                 </p>
               </div>
             ))}

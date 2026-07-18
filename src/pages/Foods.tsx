@@ -31,7 +31,7 @@ const SORTS: { key: SortKey; label: StringKey }[] = [
 ]
 
 export function Foods() {
-  const { t, tr, lang } = useI18n()
+  const { t, tr, n, lang } = useI18n()
   const [query, setQuery] = useState('')
   const [category, setCategory] = useState<FoodCategory | 'all'>('all')
   const [sort, setSort] = useState<SortKey>('name')
@@ -170,7 +170,7 @@ export function Foods() {
                     </div>
                   </div>
                   <div className="text-end">
-                    <span className="block text-2xl font-extrabold text-fg">{f.per100g.calories}</span>
+                    <span className="block text-2xl font-extrabold text-fg">{n(f.per100g.calories)}</span>
                     <span className="block text-[11px] font-bold text-muted">{t('foods.kcal')}</span>
                   </div>
                 </div>
@@ -184,8 +184,8 @@ export function Foods() {
                 </div>
 
                 <dl className="mt-4 grid grid-cols-2 gap-2 border-t border-border pt-4 text-sm">
-                  <NutrientRow label={t('foods.fiber')} value={`${f.per100g.fiber} ${t('foods.grams')}`} />
-                  <NutrientRow label={t('foods.sugar')} value={`${f.per100g.sugar} ${t('foods.grams')}`} />
+                  <NutrientRow label={t('foods.fiber')} value={`${n(f.per100g.fiber)} ${t('foods.grams')}`} />
+                  <NutrientRow label={t('foods.sugar')} value={`${n(f.per100g.sugar)} ${t('foods.grams')}`} />
                 </dl>
 
                 <p className="mt-3 text-center text-[11px] font-semibold tracking-wide text-muted uppercase">

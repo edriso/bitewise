@@ -16,7 +16,7 @@ import { Card, Container, Section, SectionHeading } from '../components/ui'
 const HERO_EMOJI = ['🥑', '🍎', '🥦', '🐟', '🥚', '🍊', '🫐', '🥕']
 
 export function Home() {
-  const { t, tr, lang } = useI18n()
+  const { t, tr, n, lang } = useI18n()
   const Arrow = lang === 'ar' ? ArrowLeft : ArrowRight
   const macros = nutrients.filter((n) => n.group === 'macro')
 
@@ -160,7 +160,7 @@ export function Home() {
                         backgroundColor: `color-mix(in srgb, ${m.accent} 14%, transparent)`,
                       }}
                     >
-                      {m.kcalPerGram} {t('learn.perGram')}
+                      {n(m.kcalPerGram)} {t('learn.perGram')}
                     </span>
                   )}
                 </div>

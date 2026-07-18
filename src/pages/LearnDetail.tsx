@@ -16,7 +16,7 @@ import { Container, Section } from '../components/ui'
 
 export function LearnDetail() {
   const { id } = useParams()
-  const { t, tr, lang } = useI18n()
+  const { t, tr, n, lang } = useI18n()
   const Arrow = lang === 'ar' ? ArrowLeft : ArrowRight
   const BackArrow = lang === 'ar' ? ArrowRight : ArrowLeft
 
@@ -83,7 +83,7 @@ export function LearnDetail() {
                     backgroundColor: `color-mix(in srgb, ${nutrient.accent} 14%, transparent)`,
                   }}
                 >
-                  {nutrient.kcalPerGram} {t('learn.perGram')}
+                  {n(nutrient.kcalPerGram)} {t('learn.perGram')}
                 </span>
               )}
             </div>

@@ -13,7 +13,7 @@ const GROUPS: { key: Nutrient['group']; title: StringKey }[] = [
 ]
 
 export function Learn() {
-  const { t, tr, lang } = useI18n()
+  const { t, tr, n: fmt, lang } = useI18n()
   const Arrow = lang === 'ar' ? ArrowLeft : ArrowRight
 
   return (
@@ -52,7 +52,7 @@ export function Learn() {
                           <h3 className="text-lg font-extrabold text-fg">{tr(n.name)}</h3>
                           {n.kcalPerGram && (
                             <span className="text-xs font-bold" style={{ color: n.accent }}>
-                              {n.kcalPerGram} {t('learn.perGram')}
+                              {fmt(n.kcalPerGram)} {t('learn.perGram')}
                             </span>
                           )}
                         </div>
